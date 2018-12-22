@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\EventLoc.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\HubLoc.cs" />
+    <Compile Include="Assets\Scripts\IceLoc.cs" />
     <Compile Include="Assets\Scripts\InteracableObject.cs" />
     <Compile Include="Assets\Scripts\InventoryController.cs" />
     <Compile Include="Assets\Scripts\MiningLoc.cs" />
@@ -80,17 +81,17 @@
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>E:/Projects/Unity/MiniMiner/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>E:/Projects/Unity/MiniMiner/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>E:/Projects/Unity/MiniMiner/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Postprocessing.Editor">
       <HintPath>E:/Projects/Unity/MiniMiner/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>E:/Projects/Unity/MiniMiner/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>E:/Projects/Unity/MiniMiner/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.DataPrivacy">
+      <HintPath>E:/Projects/Unity/MiniMiner/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

@@ -32,8 +32,10 @@ public class InventoryController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		hCapacity = 500;
-		dCapacity = 5000;
+		hCapacity = 100;
+		dCapacity = 1000;
+		hPower = 2;
+		dPower = 10;
 	}
 
     // Update is called once per frame
@@ -41,5 +43,13 @@ public class InventoryController : MonoBehaviour
     {
 		hCurrent = hMinerals + hWater;
 		dCurrent = dMinerals + dWater;
-    }
+		if(hCurrent >= hCapacity)
+		{
+			hCurrent = hCapacity;
+		}
+		if (dCurrent >= dCapacity)
+		{
+			dCurrent = dCapacity;
+		}
+	}
 }

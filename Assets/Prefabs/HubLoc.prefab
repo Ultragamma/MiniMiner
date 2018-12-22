@@ -1169,6 +1169,50 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &6996300985830626978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7832409562400714540}
+  - component: {fileID: 6996300985830626979}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7832409562400714540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6996300985830626978}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7393594859453612041}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6996300985830626979
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6996300985830626978}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7393594859453612037
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,10 +1239,11 @@ Transform:
   m_GameObject: {fileID: 7393594859453612037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -15, y: -15, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 7393594860138529808}
   - {fileID: 4116105997091192452}
+  - {fileID: 7832409562400714540}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1215,6 +1260,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bActivated: 0
+  bDocked: 0
+  hubLevel: 0
   gMan: {fileID: 0}
 --- !u!1 &7393594860138529811
 GameObject:
@@ -1259,7 +1306,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7393594860138529809
 MonoBehaviour:
@@ -1273,6 +1320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: facad1810f6262343ac2652283c792bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gMan: {fileID: 0}
+  engaged: 0
 --- !u!1 &7837540284129741399
 GameObject:
   m_ObjectHideFlags: 0

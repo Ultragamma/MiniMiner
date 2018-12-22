@@ -5,6 +5,8 @@ using UnityEngine;
 public class InteracableObject : MonoBehaviour
 {
 	public GameManager gMan;
+
+	public bool engaged;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,7 @@ public class InteracableObject : MonoBehaviour
 		{
 			other.GetComponent<ShipController>().intObj = gameObject.GetComponent<InteracableObject>();
 			other.GetComponent<ShipController>().bInteractable = true;
-			if (GetComponentInParent<MiningLoc>())
+			if (GetComponentInParent<MiningLoc>() || GetComponentInParent<IceLoc>())
 			{
 				gMan._ui.instructions.text = "Press E to begin mining";
 			}
@@ -37,6 +39,18 @@ public class InteracableObject : MonoBehaviour
 			}
 		}
 	}
+
+	private void OnTriggerStay(Collider other)
+	{
+		if (engaged)
+		{
+			gMan._ui.instructions.text = "Press E to stop mining";
+		} else
+		{
+			gMan._ui.instructions.text = "Press E to begin mining";
+		}
+	}
+
 	private void OnTriggerExit(Collider other)
 	{
 		if (other.GetComponent<ShipController>())
@@ -49,10 +63,11 @@ public class InteracableObject : MonoBehaviour
 				gMan._ui.hubMenu.SetActive(false);
 			}
 		}
+		Detach();
 	}
 
 	public void Interact()
-	{
+	{	
 		if (GetComponentInParent<MiningLoc>())
 		{
 			GetComponentInParent<MiningLoc>().bActivated = true;
@@ -68,6 +83,37 @@ public class InteracableObject : MonoBehaviour
 		if (GetComponentInParent<HubLoc>())
 		{
 			GetComponentInParent<HubLoc>().bActivated = true;
+		}
+		if (GetComponentInParent<IceLoc>())
+		{
+			GetComponentInParent<IceLoc>().bActivated = true;
+		}
+	}
+
+	public void Detach()
+	{
+		if (GetComponentInParent<MiningLoc>())
+		{
+			GetComponentInParent<MiningLoc>().bActivated = false;
+			GetComponentInParent<MiningLoc>().CancelInvoke("Mining");
+			GetComponentInParent<MiningLoc>().bMining = false;
+			gMan._ui.information.enabled = false;
+		}
+		if (GetComponentInParent<StationLoc>())
+		{
+			GetComponentInParent<StationLoc>().bActivated = false;
+		}
+		if (GetComponentInParent<EventLoc>())
+		{
+			GetComponentInParent<EventLoc>().bActivated = false;
+		}
+		if (GetComponentInParent<HubLoc>())
+		{
+			GetComponentInParent<HubLoc>().bActivated = false;
+		}
+		if (GetComponentInParent<IceLoc>())
+		{
+			GetComponentInParent<IceLoc>().bActivated = false;
 		}
 	}
 }

@@ -10,13 +10,18 @@ public class UIController : MonoBehaviour
 	public Text hMineralsText;
 	public Text hWaterText;
 	public Text hPowerText;
+	public Text hCurCap;
+
 	public Text dMineralsText;
 	public Text dWaterText;
 	public Text dPowerText;
 	public Text dCurCap;
-	public Text hCurCap;
 
 	public Text instructions;
+	public Text information;
+	public Text status;
+
+	public Color infoColor;
 
 	public GameObject hubMenu;
 
@@ -30,7 +35,7 @@ public class UIController : MonoBehaviour
     {
 		gMan = FindObjectOfType<GameManager>();
 
-		hubMenu.SetActive(false);
+		hubMenu.SetActive(false);		
 
 		//Hangar
 		hMineralsText = GameObject.Find("hMineralsLabel").GetComponent<Text>();
@@ -45,6 +50,10 @@ public class UIController : MonoBehaviour
 		dCurCap = GameObject.Find("dCurCap").GetComponent<Text>();
 
 		instructions = GameObject.Find("InstText").GetComponent<Text>();
+		information = GameObject.Find("InfoText").GetComponent<Text>();
+		status = GameObject.Find("StatusText").GetComponent<Text>();
+
+		infoColor = information.color;
 
 		//dronesText = GameObject.Find("DronesLabel").GetComponent<Text>();
 		//minersText = GameObject.Find("MinersLabel").GetComponent<Text>();
@@ -66,16 +75,21 @@ public class UIController : MonoBehaviour
 		dWaterText.text = gMan._inventory.dWater.ToString();
 		dPowerText.text = gMan._inventory.dPower.ToString();
 		dCurCap.text = gMan._inventory.dCurrent.ToString() + " / " + gMan._inventory.dCapacity.ToString();
-
+				
 		//dronesText.text = gMan._inventory.Drones.ToString();
 		//minersText.text = gMan._inventory.Miners.ToString();
 		//haulersText.text = gMan._inventory.Haulers.ToString();
 		//fightersText.text = gMan._inventory.Fighters.ToString();
-
 	}
 
 	public void MenuPop(GameObject menu)
 	{
 		hubMenu.SetActive(!menu.activeSelf);
+	}
+
+	public void InfoFade()
+	{
+		gMan._ui.information.canvasRenderer.SetAlpha(1);
+		gMan._ui.information.CrossFadeAlpha(0, 3, false);
 	}
 }
