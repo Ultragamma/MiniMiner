@@ -11,12 +11,15 @@ public class ShipController : MonoBehaviour
 	Rigidbody rb;
 
 	public bool bInteractable = false;
+	public bool bMining = false;
 
 	public InteracableObject intObj;
 
 	public InventoryController invCont;
 
 	public ParticleSystem partSys;
+
+	public LineRenderer line;
 
 	public int shipLevel = 0;
 
@@ -32,6 +35,7 @@ public class ShipController : MonoBehaviour
 		partSys = GameObject.Find("sPartSys").GetComponent<ParticleSystem>();
 		var em = partSys.emission;
 		em.enabled = false;
+		line = GetComponentInChildren<LineRenderer>();
 	}
 
     // Update is called once per frame
@@ -39,9 +43,11 @@ public class ShipController : MonoBehaviour
     {
 		Movement();
 		Interaction();
-		if(invCont.hCurrent >= invCont.hCapacity)
+		if (invCont.hCurrent >= invCont.hCapacity)
 		{
 			CancelInvoke("Mining");
+			gMan._ship.StopCoroutine("FireLaser");
+			gMan._ship.line.enabled = false;
 			gMan._ui.information.enabled = false;
 		}
 	}
@@ -59,12 +65,12 @@ public class ShipController : MonoBehaviour
 		}
 		if (Input.GetKey(KeyCode.W))
 		{
-			rb.AddForce(transform.up * _speed / 4);
+			rb.AddForce(transform.up * _speed / 8);
 			em.enabled = true;
 		}
 		if (Input.GetKey(KeyCode.S))
 		{
-			rb.AddForce(-transform.up * _speed / 4);
+			rb.AddForce(-transform.up * _speed / 8);
 		}
 		if (Input.GetKeyUp(KeyCode.W))
 		{
@@ -80,19 +86,34 @@ public class ShipController : MonoBehaviour
 			{
 				if (intObj != null)
 				{
-					if (!intObj.engaged)
+					if (!intObj.bEngaged)
 					{
 						intObj.Interact();
-						intObj.engaged = true;
+						intObj.bEngaged = true;
 						gMan._ui.information.enabled = true;
 					} else
 					{
 						intObj.Detach();
-						intObj.engaged = false;
+						intObj.bEngaged = false;
 						gMan._ui.information.enabled = false;
 					}
 				}
 			}
+		}
+	}
+
+	public IEnumerator FireLaser()
+	{
+		line.enabled = true;
+
+		while (bMining)
+		{
+			Ray ray = new Ray(transform.position, intObj.transform.position);
+
+			line.SetPosition(0, ray.origin);
+			line.SetPosition(1, intObj.transform.position);
+
+			yield return null;
 		}
 	}
 }

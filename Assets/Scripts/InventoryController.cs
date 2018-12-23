@@ -29,10 +29,12 @@ public class InventoryController : MonoBehaviour
 
 	public UIController uiController;
 
-    // Start is called before the first frame update
-    void Start()
+	public bool bHangarFull = false;
+
+	// Start is called before the first frame update
+	void Start()
     {
-		hCapacity = 100;
+		hCapacity = 50;
 		dCapacity = 1000;
 		hPower = 2;
 		dPower = 10;
@@ -46,10 +48,20 @@ public class InventoryController : MonoBehaviour
 		if(hCurrent >= hCapacity)
 		{
 			hCurrent = hCapacity;
+			bHangarFull = true;
 		}
-		if (dCurrent >= dCapacity)
+		if (hCurrent <= hCapacity)
+		{
+			bHangarFull = false;
+		}
+			if (dCurrent >= dCapacity)
 		{
 			dCurrent = dCapacity;
 		}
+		if(hWater + hMinerals >= hCapacity)
+		{
+			hMinerals = hCapacity - hWater;
+		}
 	}
+
 }

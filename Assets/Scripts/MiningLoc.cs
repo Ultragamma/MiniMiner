@@ -6,8 +6,6 @@ public class MiningLoc : MonoBehaviour
 {
 	public bool bActivated = false;
 
-	public bool bMining = false;
-
 	public int totalMinerals;
 
 	int rand;
@@ -36,24 +34,27 @@ public class MiningLoc : MonoBehaviour
 		if(intObj = null)
 		{
 			CancelInvoke("Mining");
-			bMining = false;
+			gMan._ship.StopCoroutine("FireLaser");
+			gMan._ship.line.enabled = false;
+			gMan._ship.bMining = false;
 			gMan._ui.information.enabled = false;
 		}
 		if(gMan._inventory.hCurrent >= gMan._inventory.hCapacity)
 		{
 			CancelInvoke("Mining");
-			bMining = false;
+			gMan._ship.StopCoroutine("FireLaser");
+			gMan._ship.line.enabled = false;
+			gMan._ship.bMining = false;
 			gMan._ui.information.enabled = false;
 		}
 	}
-
-
 
 	void Mining()
 	{
 		//Activate Laser
 		//Wait for Laser cycle to complete
-		bMining = true;
+		gMan._ship.bMining = true;
+		gMan._ship.StartCoroutine("FireLaser");
 		rand = Random.Range(3, 7);  //magic numbers
 		gMan._inventory.hMinerals += rand;
 		totalMinerals -= rand;

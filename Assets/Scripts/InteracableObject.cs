@@ -6,7 +6,7 @@ public class InteracableObject : MonoBehaviour
 {
 	public GameManager gMan;
 
-	public bool engaged;
+	public bool bEngaged;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,12 +42,14 @@ public class InteracableObject : MonoBehaviour
 
 	private void OnTriggerStay(Collider other)
 	{
-		if (engaged)
+		if (GetComponentInParent<MiningLoc>() || GetComponentInParent<IceLoc>())
 		{
-			gMan._ui.instructions.text = "Press E to stop mining";
-		} else
-		{
-			gMan._ui.instructions.text = "Press E to begin mining";
+			//TODO block engagement if inventory full
+			if (bEngaged)
+			{
+				gMan._ui.instructions.text = "Press E to stop mining";
+			}
+			
 		}
 	}
 
@@ -96,7 +98,9 @@ public class InteracableObject : MonoBehaviour
 		{
 			GetComponentInParent<MiningLoc>().bActivated = false;
 			GetComponentInParent<MiningLoc>().CancelInvoke("Mining");
-			GetComponentInParent<MiningLoc>().bMining = false;
+			gMan._ship.StopCoroutine("FireLaser");
+			gMan._ship.line.enabled = false;
+			gMan._ship.bMining = false;
 			gMan._ui.information.enabled = false;
 		}
 		if (GetComponentInParent<StationLoc>())
